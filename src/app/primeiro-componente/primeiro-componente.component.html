@@ -1,0 +1,129 @@
+
+<form [formGroup]="formulario">
+    <!-- NOME-->
+    @if (formulario.get('nome').hasError('required') && formulario.get('nome').touched){
+    <p class="alert alert-warning">O campo nome é obrigatório</p>}
+
+    @if (formulario.get('nome').hasError('minlength') && formulario.get('nome').touched){
+        <p class="alert alert-warning">O campo nome precisa conter pelo menos 3 caracteres</p>}
+
+
+    <input type="text" formControlName="nome" placeholder="Nome" class="form-control">
+   
+
+    <!-- IDADE -->
+    @if (formulario.get('idade').hasError('required') && formulario.get('idade').touched){
+    <p class="alert alert-warning">O campo nome é obrigatório</p>}
+
+    @if (formulario.get('idade').hasError('min') && formulario.get('idade').touched){
+        <p class="alert alert-warning">O campo idade não aceita números inferiores a 0</p>}
+    
+    @if (formulario.get('idade').hasError('max') && formulario.get('idade').touched){
+        <p class="alert alert-warning">O campo idade não aceita números superiores a 120</p>}
+  
+    <input type="number" formControlName="idade" placeholder="Idade" class="form-control">
+    <!-- CIDADE -->
+
+    @if (formulario.get('cidade').hasError('required') && formulario.get('cidade').touched){
+        <p class="alert alert-warning">O campo cidade é obrigatório</p>}
+    
+    @if (formulario.get('cidade').hasError('minlength') && formulario.get('cidade').touched){
+            <p class="alert alert-warning">O campo cidade precisa conter pelo menos 3 caracteres</p>}
+    <input type="text" formControlName="cidade" placeholder="Cidade" class="form-control">
+
+    <!--FILME-->
+
+    
+    @if (formulario.get('filme').hasError('required') && formulario.get('filme').touched){
+        <p class="alert alert-warning">Digite seu filme favorito!</p>}
+    
+    @if (formulario.get('cidade').hasError('minlength') && formulario.get('cidade').touched){
+            <p class="alert alert-warning">O campo filme precisa conter pelo menos 3 caracteres</p>}
+    <input type="text" formControlName="filme" placeholder="Filme Favorito" class="form-control">
+
+    <!--MUSICA-->
+    @if (formulario.get('musica').hasError('required') && formulario.get('musica').touched){
+        <p class="alert alert-warning">Qual é a sua musica favorita!</p>}
+    
+    @if (formulario.get('musica').hasError('minlength') && formulario.get('musica').touched){
+            <p class="alert alert-warning">O campo musica precisa conter pelo menos 3 caracteres</p>}
+    <input type="text" formControlName="musica" placeholder="Musica Favorita" class="form-control">
+
+    <!--SEXO-->
+
+
+    <div><label>Sexo</label></div>
+    <div>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="sexo" value="M" 
+            formControlName="sexo" class="form-check-input">
+            <label class="form-check-label">Masculino</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="sexo" value="F" 
+            formControlName="sexo" class="form-check-input">
+            <label class="form-check-label">Feminino</label>
+        </div>
+    </div>
+
+    <!--ACADEMIA-->
+    <div><label>Academia</label></div>
+    <div>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="academia" value="S" 
+            formControlName="academia" class="form-check-input">
+            <label class="form-check-label">Sim, frequento</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="academia" value="N" 
+            formControlName="academia" class="form-check-input">
+            <label class="form-check-label">Não frequento</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input type="radio" name="academia" value="N" 
+            formControlName="academia" class="form-check-input">
+            <label class="form-check-label">Pretendo frequentar</label>
+        </div>
+    </div>
+    <!---->
+
+    @if (btnCadastrar) {
+    <input type="button" value="Cadastrar" (click)="cadastrar()" class="btn btn-primary" [disabled]="formulario.invalid">
+     }@else{
+    <input type="button" value="Alterar" (click)="alterar()" class="btn btn-primary">
+    <input type="button" value="Remover" (click)="remover()" class="btn btn-primary">
+    <input type="button" value="Cancelar" (click)="cancelar()" class="btn btn-primary">       
+    }
+
+
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Cidade</th>
+            <th>Sexo</th>
+            <th>Filmes</th>
+            <th>Musica</th>
+            <th>Academia</th>
+            <th>Selecionar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let v of vetor; index as indice">
+            <td>{{indice + 1}}</td>
+            <td>{{v.nome}}</td>
+            <td>{{v.idade}}</td>
+            <td>{{v.cidade}}</td>
+            <td>{{v.sexo}}</td>
+            <td>{{v.filme}}</td>
+            <td>{{v.musica}}</td>
+            <td>{{v.academia}}</td>
+            <td><button class="btn btn-primary" (click)="selecionar(indice)">Selecionar</button></td>
+        </tr>
+
+    </tbody>
+</table>
